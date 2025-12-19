@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Coffee Co.</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #2c2c2c;
+            overflow-x: hidden;
+            background: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #6e4c3f 0%, #3d2419 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color .3s;
+        }
+
+        .nav-menu a:hover {
+            color: #d4a574;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4a574;
+            transition: width .3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .icon {
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: transform .3s;
+        }
+
+        .icon:hover {
+            transform: scale(1.15);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8b6f4e 0%, #d4a574 100%);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 550px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #f5f5f5;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: #fff;
+            color: #6e4c3f;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all .3s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            background: #f9f9f9;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .coffee-cup {
+            font-size: 15rem;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .coffee-beans {
+            position: absolute;
+            top: -20px;
+            right: -40px;
+        }
+
+        .bean {
+            display: inline-block;
+            font-size: 2rem;
+            color: #3d2419;
+            animation: fall 2s ease-in-out infinite;
+            opacity: .7;
+        }
+
+        .bean:nth-child(2) {
+            animation-delay: .3s;
+        }
+
+        .bean:nth-child(3) {
+            animation-delay: .6s;
+        }
+
+        .bean:nth-child(4) {
+            animation-delay: .9s;
+        }
+
+        .bean:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(100px) rotate(180deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+        .categories,
+        .milkshakes,
+        .blogs {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            color: #3d2419;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #f8f5f2 0%, #e8e0d5 100%);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all .4s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-image {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            color: #3d2419;
+            margin-bottom: .8rem;
+        }
+
+        .category-card p {
+            color: #666;
+            font-size: .95rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            transition: all .4s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #6e4c3f;
+            color: #fff;
+            padding: .4rem .9rem;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+
+        .product-image {
+            font-size: 6rem;
+            margin: 1.5rem 0;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+
+        .green {
+            background: linear-gradient(135deg, #a8e6cf 0%, #7bc8a4 100%);
+        }
+
+        .purple {
+            background: linear-gradient(135deg, #d4a5d8 0%, #b38bb5 100%);
+        }
+
+        .brown {
+            background: linear-gradient(135deg, #d4a574 0%, #a67c52 100%);
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            color: #3d2419;
+            margin-bottom: .8rem;
+        }
+
+        .product-rating {
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #6e4c3f;
+        }
+
+        .add-btn {
+            background: #6e4c3f;
+            color: #fff;
+            border: none;
+            padding: .7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all .3s;
+        }
+
+        .add-btn:hover {
+            background: #3d2419;
+            transform: scale(1.05);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all .4s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, #d4a574 0%, #8b6f4e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-date {
+            color: #999;
+            font-size: .85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .blog-card h3 {
+            font-size: 1.4rem;
+            color: #3d2419;
+            margin: 1rem 0;
+        }
+
+        .blog-card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: #6e4c3f;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color .3s;
+        }
+
+        .read-more:hover {
+            color: #d4a574;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c2419 0%, #1a1410 100%);
+            color: #ccc;
+            padding: 4rem 0 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: .8rem;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color .3s;
+        }
+
+        .footer-column a:hover {
+            color: #d4a574;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .social-icons a {
+            transition: transform .3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #888;
+            font-size: .85rem;
+        }
+
+        @media (max-width:768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 2rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .coffee-cup {
+                font-size: 8rem;
+                margin-top: 2rem;
+            }
+
+            .nav-menu {
+                gap: 1.5rem;
+            }
+
+            .category-grid,
+            .product-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Artisan Coffee</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <span class="icon">🔍</span>
+                <span class="icon">🛒</span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Premium Coffee Experience</h1>
+            <p class="hero-subtitle">Discover the finest handcrafted coffee from around the world.</p>
+            <button class="cta-button" style="border-radius:40px;">Explore Now</button>
+        </div>
+        <div class="hero-image">
+            <div class="coffee-cup">☕</div>
+            <div class="coffee-beans">
+                <span class="bean">●</span>
+                <span class="bean">●</span>
+                <span class="bean">●</span>
+                <span class="bean">●</span>
+                <span class="bean">●</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories" id="menu">
+        <div class="container">
+            <h2 class="section-title">Top Categories</h2>
+            <p class="section-subtitle">Explore our finest selections of premium coffee varieties.</p>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-image">☕</div>
+                    <h3>Classic Espresso</h3>
+                    <p>Rich and bold espresso shots to kickstart your day.</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-image">🥤</div>
+                    <h3>Iced Collection</h3>
+                    <p>Refreshing cold-brew drinks for every mood.</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-image">☕</div>
+                    <h3>Specialty Drinks</h3>
+                    <p>Signature creations crafted by our baristas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="milkshakes">
+        <div class="container">
+            <h2 class="section-title">Signature Beverages</h2>
+            <p class="section-subtitle">Indulge in our exclusive handcrafted beverage collection.</p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <div class="product-image green">🥤</div>
+                    <h3>Matcha Fusion</h3>
+                    <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                    <div class="product-footer">
+                        <span class="price">₹249</span>
+                        <button class="add-btn" style="border-radius:30px;">Add +</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">HOT</div>
+                    <div class="product-image purple">🥤</div>
+                    <h3>Berry Delight</h3>
+                    <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                    <div class="product-footer">
+                        <span class="price">₹229</span>
+                        <button class="add-btn" style="border-radius:30px;">Add +</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge">BEST</div>
+                    <div class="product-image brown">🥤</div>
+                    <h3>Caramel Dream</h3>
+                    <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                    <div class="product-footer">
+                        <span class="price">₹269</span>
+                        <button class="add-btn" style="border-radius:30px;">Add +</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blogs" id="blog">
+        <div class="container">
+            <h2 class="section-title">Coffee Stories</h2>
+            <p class="section-subtitle">Dive into the world of coffee through our latest articles.</p>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">📰</div>
+                    <div class="blog-content">
+                        <span class="blog-date">Dec 15, 2025</span>
+                        <h3>The Art of Pour Over Coffee</h3>
+                        <p>Learn the technique behind the perfect pour over brew and why it is a favorite among coffee
+                            enthusiasts.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">📰</div>
+                    <div class="blog-content">
+                        <span class="blog-date">Dec 12, 2025</span>
+                        <h3>Single Origin vs Blend</h3>
+                        <p>Understand the difference between single origin and blended beans to find your ideal cup.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">📰</div>
+                    <div class="blog-content">
+                        <span class="blog-date">Dec 10, 2025</span>
+                        <h3>Coffee Brewing Guide</h3>
+                        <p>Master the fundamentals of brewing with tips on extraction, temperature, and timing.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Locations</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company Info</h4>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Investors</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Artisan Coffee Co. | Privacy Policy | Terms of Service | Cookie Settings | Legal</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
